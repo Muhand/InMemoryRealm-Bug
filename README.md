@@ -1,5 +1,5 @@
 # InMemoryRealm-Bug
-Issue can be tracked here: 
+Issue can be tracked here: https://github.com/realm/realm-cocoa/issues/7017
 
 **NOTE: This only happens using `InMemoryRealm` configuration something like `Realm.Configuration(inMemoryIdentifier: "messagesRealm")`**
 
