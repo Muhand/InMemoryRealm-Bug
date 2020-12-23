@@ -1,1 +1,50 @@
 # InMemoryRealm-Bug
+Issue can be tracked here: 
+
+**NOTE: This only happens using `InMemoryRealm` configuration something like `Realm.Configuration(inMemoryIdentifier: "messagesRealm")`**
+
+## Goals
+I am writing a cache protocol which I can implement later using any or multiple cache libraries (regardless of disk or memory), in this case it is `Realm`
+
+## Expected Results
+Expectation was when the save function is called realm should successfully save the object in memory and when retrieved it should return it successfully or return all objects. 
+
+## Actual Results
+In memory realm is returning empty every time I insert something and try to fetch it (I am 100% sure it is inserting successfully and I will explain later why)
+
+## Steps for others to Reproduce
+### Reproduce the problem
+1. Clone the git repository in `Code Sample`
+2. Compile and run on a simulator/device (they both are giving the same results)
+3. In the `Message` field write anything
+4. Press `Save`
+5. Now press `Refresh` it should populate a list with data but it won't do it
+
+### What I have done
+While reproducing the problem navigate to `Realm` -> `InMemoryRealmCache.swift` and setup a breakpoint at line `94`.
+Now run the application again and repeat step `3` to `4` the application should break after pressing `Save` in the `lldb` write `po realm.objects(MessageRealmEntity.self)` and finally continue the application and now press `Refresh` and the list will be populated No matter how many times you add and refresh it will work now 100%.
+
+## Code Sample
+This is a git repository for a dummy application to reproduce the bug
+
+## Version of Realm and Tooling
+<!---
+[In the CONTRIBUTING guidelines](https://git.io/vgxJO), you will find a script,
+which will help determining some of these versions.
+-->
+Realm framework version: RealmSwift (10.1.4)
+
+Realm Object Server version: ?
+
+Xcode version: Version 12.2 (12B45b)
+
+iOS/OSX version: iOS 14.2
+
+Dependency manager + version: ?
+
+## Few important notes
+- As can be seen in the project I am initializing `Realm` in every function in my wrapper this way I can avoid `Realm accessed from incorrect thread` issue.
+- However, to avoid realm being initialized on different threads I made sure to set a `DispatchQueue` in which they all are initialized and ran in.
+- I have tried making my `Realm` object to be static and living somewhere else but this is not scalable and if someone in the team called the functions from a different thread it can crash the app with the error `Realm accessed from incorrect thread` 
+- The wrapper works 100% fine if I am using disk realm instead of memory
+- The wrapper is initialized only once so I don't have multiple instances of it
