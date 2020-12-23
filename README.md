@@ -21,11 +21,18 @@ In memory realm is returning empty every time I insert something and try to fetc
 5. Now press `Refresh` it should populate a list with data but it won't do it
 
 ### What I have done
-While reproducing the problem navigate to `Realm` -> `InMemoryRealmCache.swift` and setup a breakpoint at line `94`.
-Now run the application again and repeat step `3` to `4` the application should break after pressing `Save` in the `lldb` write `po realm.objects(MessageRealmEntity.self)` and finally continue the application and now press `Refresh` and the list will be populated No matter how many times you add and refresh it will work now 100%.
+- While reproducing the problem navigate to `Realm` -> `InMemoryRealmCache.swift` and setup a breakpoint at line `94`.
+- Now run the application again and repeat step `3` to `4` the application should break after pressing `Save`
+- In the `lldb` write `po realm.objects(MessageRealmEntity.self)` and finally continue the application
+- Now press `Refresh` and the list will be populated No matter how many times you add and refresh it will work now 100%.
+
+### Video to show the problem and how to reproduce
+https://user-images.githubusercontent.com/12287547/102961663-e3b3a200-44b2-11eb-8cc4-a19ed831c6c1.mov
 
 ## Code Sample
-This is a git repository for a dummy application to reproduce the bug: https://github.com/Muhand/InMemoryRealm-Bug
+This is a git repository for a dummy application to reproduce the bug: 
+
+https://github.com/Muhand/InMemoryRealm-Bug
 
 ## Version of Realm and Tooling
 
