@@ -1,0 +1,6 @@
+framework module Pods_InMemoryRealm {
+  umbrella header "Pods-InMemoryRealm-umbrella.h"
+
+  export *
+  module * { export * }
+}
