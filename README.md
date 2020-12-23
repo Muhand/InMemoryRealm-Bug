@@ -25,13 +25,10 @@ While reproducing the problem navigate to `Realm` -> `InMemoryRealmCache.swift` 
 Now run the application again and repeat step `3` to `4` the application should break after pressing `Save` in the `lldb` write `po realm.objects(MessageRealmEntity.self)` and finally continue the application and now press `Refresh` and the list will be populated No matter how many times you add and refresh it will work now 100%.
 
 ## Code Sample
-This is a git repository for a dummy application to reproduce the bug
+This is a git repository for a dummy application to reproduce the bug: https://github.com/Muhand/InMemoryRealm-Bug
 
 ## Version of Realm and Tooling
-<!---
-[In the CONTRIBUTING guidelines](https://git.io/vgxJO), you will find a script,
-which will help determining some of these versions.
--->
+
 Realm framework version: RealmSwift (10.1.4)
 
 Realm Object Server version: ?
